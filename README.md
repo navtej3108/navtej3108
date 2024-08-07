@@ -1,9 +1,9 @@
 - 👋 Hi, I’m @navtej3108
-- 👀 I’m interested in ...cyber security
+- 👀 I’m interested in ...Networking
 - 🌱 I’m currently learning ...Basics of coding
-- 💞️ I’m looking to collaborate on ...
+- 💞️ I’m looking to collaborate on ...Python Projects
 - 📫 How to reach me ...navtej3108@gmail.com
-- 😄 Pronouns: ...
+- 😄 Pronouns: ...He/Him
 - ⚡ Fun fact: ...
 
 <!---
