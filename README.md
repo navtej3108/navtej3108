@@ -2,7 +2,7 @@
 - 👀 I’m interested in ...Cybersecurity(Quantum Hacking)
 - 🌱 I’m currently learning ...Basics of coding(c,python) , network security and data protection.
 - 💞️ I’m looking to collaborate on ...Python Projects
-- 📫 How to reach me ...navtej3108@gmail.com
+- 📫 How to reach me ...navtej3108@gmail.com/+919945754686.
 - 😄 Pronouns: ...He/Him
 - ⚡ Fun fact: ...Cybercrime caused $8.44 trillion in losses in 2023, projected to rise to $11 trillion by 2025, alongside a global shortage of 3.5 million ethical hackers.
 <!---
