@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @navtej3108
-- 👀 I’m interested in ...Cybersecurity(Quantum Hacking)
+- 👀 I’m interested in ...Cybersecurity(Quantum Cryptography)
 - 🌱 I’m currently learning ...Basics of coding(c,python) , network security and data protection.
 - 💞️ I’m looking to collaborate on ...Python Projects
 - 📫 How to reach me ...navtej3108@gmail.com/+919945754686.
