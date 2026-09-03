@@ -158,10 +158,4 @@ I prefer to keep projects documented honestly, including their limitations and t
 
 ---
 
-## Connect
-
-- GitHub: [github.com/navtej3108](https://github.com/navtej3108)
-
----
-
 *Building, learning, and improving one project at a time.*
