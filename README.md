@@ -4,7 +4,7 @@
 Interested in **Software Engineering and AI/ML Engineering**.
 
 I enjoy building practical software, learning how systems work, and turning ideas into working projects. My current focus is strengthening my **DSA, Python, Java, SQL, data analysis, and machine learning** skills.
-
+https://navtej3108.github.io/navtej3108/
 ---
 
 ## About Me
