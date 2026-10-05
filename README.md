@@ -14,6 +14,7 @@ I enjoy building practical software, learning how systems work, and turning idea
 - Interested in **Software Development and AI/ML**
 - Currently improving **DSA, ML concepts, data preprocessing, and software development**
 - Have completed an internship involving practical Python and automation projects
+  
 -> https://navtej3108.github.io/navtej3108/
 ---
 
