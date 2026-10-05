@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Navtej Pawan — Software Engineer &amp; Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0c10;
+    --bg-raised:#12151b;
+    --line:#242832;
+    --ink:#f2f1ec;
+    --ink-dim:#9aa0ab;
+    --amber:#f5a623;
+    --cyan:#4fd1c5;
+    --font-display:'Space Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-body:'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--amber);color:#0a0c10;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wide-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+  /* ---------- layout shell ---------- */
+  .shell{max-width:1600px;margin:0 auto;padding:0 48px;}
+  section{padding:120px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .eyebrow{
+    font-family:var(--font-display);
+    font-size:.85rem;
+    color:var(--ink-dim);
+    letter-spacing:.02em;
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--amber);display:inline-block;}
+  h2.section-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(2rem,4vw,2.9rem);
+    letter-spacing:-0.01em;
+    margin-bottom:48px;
+    max-width:14ch;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding-top:calc(20px + env(safe-area-inset-top,0px));
+    padding-bottom:20px;
+    background:linear-gradient(to bottom, rgba(10,12,16,.92), rgba(10,12,16,0));
+    pointer-events:none;
+  }
+  header .shell{display:flex;justify-content:space-between;align-items:center;pointer-events:none;}
+  .brand{
+    font-family:var(--font-display);font-weight:700;font-size:1.05rem;
+    pointer-events:auto;
+  }
+  .brand span{color:var(--amber);}
+  nav.primary-nav{
+    display:flex;gap:6px;background:rgba(18,21,27,.7);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:999px;padding:6px;pointer-events:auto;
+  }
+  nav.primary-nav a{
+    font-size:.85rem;padding:9px 16px;border-radius:999px;color:var(--ink-dim);
+    transition:color .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  nav.primary-nav a.active,nav.primary-nav a:hover{color:var(--ink);background:var(--bg-raised);}
+  .nav-toggle{display:none;pointer-events:auto;background:none;border:1px solid var(--line);border-radius:10px;width:42px;height:42px;color:var(--ink);font-size:1.1rem;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;border-bottom:1px solid var(--line);
+    padding-top:140px;
+  }
+  .hero-grid{
+    position:absolute;inset:0;z-index:0;opacity:.5;
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 70% 60% at 60% 40%, black 10%, transparent 75%);
+  }
+  .hero .shell{position:relative;z-index:1;max-width:1800px;}
+  .hero-kicker{
+    font-family:var(--font-display);color:var(--cyan);font-size:.95rem;
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .dot-live{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(79,209,197,.6);animation:pulse 2.2s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(79,209,197,.55);}
+    70%{box-shadow:0 0 0 12px rgba(79,209,197,0);}
+    100%{box-shadow:0 0 0 0 rgba(79,209,197,0);}
+  }
+  h1.hero-name{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(3rem,10vw,7.2rem);
+    line-height:.95;letter-spacing:-0.02em;
+    opacity:0;transform:translateY(24px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  h1.hero-name .last{color:var(--ink-dim);}
+  .hero-role{
+    font-family:var(--font-display);font-size:clamp(1.1rem,2.2vw,1.6rem);
+    color:var(--ink-dim);margin-top:22px;max-width:26ch;
+    opacity:0;transform:translateY(20px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .12s forwards;
+  }
+  .hero-role .amber{color:var(--amber);}
+  .hero-role .cyan{color:var(--cyan);}
+  .hero-actions{
+    display:flex;flex-wrap:wrap;gap:14px;margin-top:44px;
+    opacity:0;transform:translateY(20px);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) .24s forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+  .btn{
+    font-family:var(--font-display);font-size:.92rem;font-weight:500;
+    padding:14px 26px;border-radius:10px;display:inline-flex;align-items:center;gap:10px;
+    border:1px solid transparent;transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-solid{background:var(--amber);color:#100b02;}
+  .btn-solid:hover{background:#ffb84d;}
+  .btn-outline{border-color:var(--line);color:var(--ink);}
+  .btn-outline:hover{border-color:var(--ink-dim);}
+  .hero-meta{
+    position:absolute;right:32px;bottom:40px;z-index:1;
+    display:flex;gap:34px;
+  }
+  .hero-meta .m{text-align:right;}
+  .hero-meta .m b{font-family:var(--font-display);font-size:1.5rem;display:block;}
+  .hero-meta .m small{color:var(--ink-dim);font-size:.75rem;}
+  @media (max-width:760px){.hero-meta{display:none;}}
+
+  /* ---------- about ---------- */
+  .about-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:start;}
+  .about-copy p{color:var(--ink-dim);font-size:1.08rem;max-width:62ch;}
+  .about-copy p+p{margin-top:18px;}
+  .fact-list{border-top:1px solid var(--line);}
+  .fact-row{
+    display:flex;justify-content:space-between;gap:18px;padding:16px 0;
+    border-bottom:1px solid var(--line);font-family:var(--font-display);font-size:.95rem;
+  }
+  .fact-row span:first-child{color:var(--ink-dim);}
+  @media (max-width:860px){.about-wrap{grid-template-columns:1fr;}}
+
+  /* ---------- role toggle (interactive) ---------- */
+  .lens{
+    display:inline-flex;gap:4px;background:var(--bg-raised);border:1px solid var(--line);
+    border-radius:999px;padding:4px;margin-bottom:44px;
+  }
+  .lens button{
+    font-family:var(--font-display);font-size:.85rem;padding:10px 20px;border-radius:999px;
+    color:var(--ink-dim);border:none;background:none;cursor:pointer;transition:.25s ease;
+  }
+  .lens button.on{background:var(--amber);color:#100b02;}
+
+  /* ---------- skills ---------- */
+  .skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .skill-group{background:var(--bg);padding:30px 26px;transition:opacity .3s ease, filter .3s ease;}
+  .skill-group h3{font-family:var(--font-display);font-size:1rem;margin-bottom:16px;color:var(--ink-dim);font-weight:500;}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{
+    font-size:.85rem;padding:7px 12px;border:1px solid var(--line);border-radius:8px;
+    transition:all .25s ease;
+  }
+  .tag.dim{opacity:.3;}
+  .tag.hit{border-color:var(--amber);color:var(--amber);}
+  @media (max-width:860px){.skill-groups{grid-template-columns:1fr;}}
+
+  /* ---------- projects ---------- */
+  .proj-list{border-top:1px solid var(--line);}
+  .proj{
+    border-bottom:1px solid var(--line);padding:28px 0;cursor:pointer;
+    display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:20px;
+    transition:background .25s ease;
+  }
+  .proj:hover{background:var(--bg-raised);}
+  .proj .idx{font-family:var(--font-display);color:var(--ink-dim);font-size:1rem;}
+  .proj .pname{font-family:var(--font-display);font-size:clamp(1.15rem,2.4vw,1.6rem);font-weight:600;}
+  .proj .ptags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .proj .ptags span{font-size:.72rem;padding:4px 9px;border-radius:6px;background:var(--bg-raised);color:var(--ink-dim);border:1px solid var(--line);}
+  .proj .plens{font-size:.7rem;font-family:var(--font-display);padding:4px 9px;border-radius:6px;}
+  .plens.se{color:var(--cyan);border:1px solid rgba(79,209,197,.4);}
+  .plens.ds{color:var(--amber);border:1px solid rgba(245,166,35,.4);}
+  .proj .arrow{font-family:var(--font-display);font-size:1.4rem;color:var(--ink-dim);transition:transform .25s ease;}
+  .proj:hover .arrow{transform:translateX(6px);color:var(--amber);}
+  .proj-detail{
+    max-height:0;overflow:hidden;transition:max-height .4s ease, padding .4s ease;
+    grid-column:1/-1;
+  }
+  .proj.open .proj-detail{max-height:260px;padding-top:18px;}
+  .proj-detail p{color:var(--ink-dim);max-width:62ch;margin-bottom:14px;}
+  .proj-detail .links{display:flex;gap:14px;}
+  .proj-detail .links a{font-size:.85rem;font-family:var(--font-display);border-bottom:1px solid var(--line);padding-bottom:3px;}
+  .proj-detail .links a:hover{border-color:var(--amber);color:var(--amber);}
+  .proj[data-lens]{transition:opacity .3s ease;}
+  .proj.hide{display:none;}
+
+  /* ---------- timeline ---------- */
+  .tl{border-top:1px solid var(--line);}
+  .tl-item{
+    display:grid;grid-template-columns:180px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line);
+  }
+  .tl-item .when{color:var(--ink-dim);font-family:var(--font-display);font-size:.9rem;}
+  .tl-item h4{font-family:var(--font-display);font-size:1.15rem;font-weight:600;margin-bottom:6px;}
+  .tl-item p{color:var(--ink-dim);max-width:60ch;font-size:.96rem;}
+  @media (max-width:640px){.tl-item{grid-template-columns:1fr;gap:8px;}}
+
+  /* ---------- contact / footer ---------- */
+  footer{padding:110px 0 60px;}
+  .contact-head{
+    font-family:var(--font-display);font-weight:600;
+    font-size:clamp(2.2rem,6vw,4.4rem);letter-spacing:-0.02em;line-height:1.05;
+    margin-bottom:50px;max-width:16ch;
+  }
+  .contact-head a{border-bottom:2px solid var(--amber);}
+  .social-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:70px;}
+  .social-card{
+    border:1px solid var(--line);border-radius:12px;padding:18px 22px;flex:1;min-width:190px;
+    display:flex;justify-content:space-between;align-items:center;transition:.25s ease;
+  }
+  .social-card:hover{border-color:var(--amber);background:var(--bg-raised);}
+  .social-card .lbl{font-family:var(--font-display);font-size:.95rem;}
+  .social-card small{color:var(--ink-dim);display:block;font-size:.75rem;margin-top:3px;}
+  .foot-bottom{display:flex;justify-content:space-between;color:var(--ink-dim);font-size:.82rem;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:26px;}
+
+  @media (max-width:760px){
+    section{padding:80px 0;}
+    .shell{padding:0 20px;}
+    nav.primary-nav{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh;border-radius:0;
+      flex-direction:column;justify-content:center;align-items:center;background:var(--bg);
+      display:none;gap:10px;backdrop-filter:none;}
+    nav.primary-nav.open{display:flex;}
+    nav.primary-nav a{font-size:1.3rem;padding:14px 24px;}
+    .nav-toggle{display:block;}
+    .hero-meta{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
+  }
+
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="shell">
+    <div class="brand">NAV<span>.</span></div>
+    <nav class="primary-nav" id="primaryNav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#timeline">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="shell">
+    <div class="hero-kicker"><span class="dot-live"></span> Open to Software Engineering &amp; Data Science roles</div>
+    <h1 class="hero-name">Navtej<br><span class="last">Pawan.</span></h1>
+    <p class="hero-role">Building at the intersection of <span class="cyan">clean software</span> and <span class="amber">real data</span> — one BTech CSIT student at a time.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#projects">View Projects ↗</a>
+      <a class="btn btn-outline" href="#contact">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div class="m"><b>8.5</b><small>CGPA</small></div>
+    <div class="m"><b>3rd</b><small>Year, REVA University</small></div>
+    <div class="m"><b>4+</b><small>Shipped Projects</small></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="shell">
+    <div class="eyebrow">About</div>
+    <h2 class="section-title">A problem-solver first, a developer by craft.</h2>
+    <div class="about-wrap">
+      <div class="about-copy">
+        <p>I'm a third-year B.Tech CSIT student at REVA University, passionate about solving complex problems through code. I've built a strong foundation in Data Structures &amp; Algorithms through consistent practice on LeetCode, and I actively seek opportunities in Software Engineering and Data Science, where I can apply analytical thinking to build scalable, data-driven solutions.</p>
+        <p>Outside coursework, I build practical projects — from full-stack platforms to computer-vision tools — because I learn best by shipping something that actually runs.</p>
+      </div>
+      <div class="fact-list">
+        <div class="fact-row"><span>Based in</span><span>Bengaluru, India</span></div>
+        <div class="fact-row"><span>Studying</span><span>B.Tech, CSIT — REVA University</span></div>
+        <div class="fact-row"><span>Focus</span><span>DSA · Full-Stack · Data Analysis</span></div>
+        <div class="fact-row"><span>Status</span><span>Open to internships</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="shell">
+    <div class="eyebrow">Skills</div>
+    <h2 class="section-title">What I build with.</h2>
+    <div class="lens" role="tablist" aria-label="Filter skills by focus">
+      <button class="on" data-lens="all">All</button>
+      <button data-lens="se">Software Engineering</button>
+      <button data-lens="ds">Data Science</button>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="skill-tags">
+          <span class="tag" data-lens="se">Java</span>
+          <span class="tag" data-lens="se ds">Python</span>
+          <span class="tag" data-lens="se">JavaScript</span>
+          <span class="tag" data-lens="se">C</span>
+          <span class="tag" data-lens="ds">R</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <div class="skill-tags">
+          <span class="tag" data-lens="se">HTML5</span>
+          <span class="tag" data-lens="se">CSS</span>
+          <span class="tag" data-lens="se">React</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Database &amp; Tools</h3>
+        <div class="skill-tags">
+          <span class="tag" data-lens="ds se">MySQL</span>
+          <span class="tag" data-lens="ds">Pandas / NumPy</span>
+          <span class="tag" data-lens="ds">OpenCV</span>
+          <span class="tag" data-lens="se">Git &amp; GitHub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="shell">
+    <div class="eyebrow">Selected Work</div>
+    <h2 class="section-title">Four projects, two directions.</h2>
+    <div class="proj-list" id="projList">
+
+      <article class="proj" data-lens="se">
+        <div class="idx">01</div>
+        <div>
+          <div class="pname">ClinicConnect</div>
+          <div class="ptags">
+            <span class="plens se">Software Engineering</span>
+            <span>React</span><span>TypeScript</span><span>Vite</span><span>Tailwind</span><span>Supabase</span>
+          </div>
+          <div class="proj-detail">
+            <p>A full-stack healthcare appointment platform with separate patient, doctor and admin workflows — role-based authentication, clinic &amp; doctor management, appointment booking with status tracking, and row-level security policies on a Supabase-backed database.</p>
+            <div class="links">
+              <a href="https://github.com/navtej3108/clinicconnect" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">＋</div>
+      </article>
+
+      <article class="proj" data-lens="ds">
+        <div class="idx">02</div>
+        <div>
+          <div class="pname">ROI Selector</div>
+          <div class="ptags">
+            <span class="plens ds">Data Science / Automation</span>
+            <span>Python</span><span>Streamlit</span><span>OpenCV</span><span>Pandas</span>
+          </div>
+          <div class="proj-detail">
+            <p>A planogram shelf-coordinate tool: upload a shelf image, select regions of interest, label each one, and export the coordinates to Excel — built to speed up manual retail-shelf data collection.</p>
+            <div class="links">
+              <a href="https://github.com/navtej3108/ROI-selector" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">＋</div>
+      </article>
+
+      <article class="proj" data-lens="ds">
+        <div class="idx">03</div>
+        <div>
+          <div class="pname">Webcam Face Recognition</div>
+          <div class="ptags">
+            <span class="plens ds">Data Science / ML</span>
+            <span>Python</span><span>OpenCV</span><span>dlib</span><span>face-recognition</span>
+          </div>
+          <div class="proj-detail">
+            <p>A real-time computer-vision pipeline that detects faces from a live webcam feed, generates face embeddings, and matches them against known encodings — covering detection, embeddings, and similarity comparison end to end.</p>
+            <div class="links">
+              <a href="https://github.com/navtej3108/image_recognition_using_webcam" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">＋</div>
+      </article>
+
+      <article class="proj" data-lens="se">
+        <div class="idx">04</div>
+        <div>
+          <div class="pname">Python Socket Chat</div>
+          <div class="ptags">
+            <span class="plens se">Software Engineering / Systems</span>
+            <span>Python</span><span>Sockets</span><span>Threading</span><span>Tkinter</span>
+          </div>
+          <div class="proj-detail">
+            <p>A simple client-server chat application built from raw TCP sockets with a Tkinter interface — covers concurrent connections, message handling, and core client-server architecture fundamentals.</p>
+            <div class="links">
+              <a href="https://github.com/navtej3108/python-socket-chat" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">＋</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="shell">
+    <div class="eyebrow">Experience &amp; Education</div>
+    <h2 class="section-title">Where I've learned so far.</h2>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="when">Jun 2024 — Aug 2024</div>
+        <div>
+          <h4>Data Science Software Intern, Health &amp; Glow</h4>
+          <p>Worked with real operational data, supporting data collection, processing, and reporting workflows during a two-month internship.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="when">2024 — 2028</div>
+        <div>
+          <h4>B.Tech, Computer Science &amp; Information Technology</h4>
+          <p>REVA University, Bengaluru — currently in 3rd year, CGPA 8.5. Coursework spanning data structures &amp; algorithms, databases, and full-stack development.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="shell">
+    <div class="eyebrow">Contact</div>
+    <h2 class="contact-head">Let's build tools that make a real-world impact. <a href="mailto:navtej3108@gmail.com">Say hello →</a></h2>
+    <div class="social-row">
+      <a class="social-card" href="https://linkedin.com/in/navtej-pawan" target="_blank" rel="noopener">
+        <span><span class="lbl">LinkedIn</span><small>in/navtej-pawan</small></span><span>↗</span>
+      </a>
+      <a class="social-card" href="https://github.com/navtej3108" target="_blank" rel="noopener">
+        <span><span class="lbl">GitHub</span><small>@navtej3108</small></span><span>↗</span>
+      </a>
+      <a class="social-card" href="mailto:navtej3108@gmail.com">
+        <span><span class="lbl">Email</span><small>navtej3108@gmail.com</small></span><span>↗</span>
+      </a>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 K Navtej Pawan</span>
+      <span>Bengaluru, India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const primaryNav = document.getElementById('primaryNav');
+  navToggle.addEventListener('click', () => primaryNav.classList.toggle('open'));
+  primaryNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => primaryNav.classList.remove('open')));
+
+  // Scrollspy
+  const navLinks = [...primaryNav.querySelectorAll('a')];
+  const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => spy.observe(s));
+
+  // Project accordion
+  document.querySelectorAll('.proj').forEach(p => {
+    p.addEventListener('click', () => {
+      const wasOpen = p.classList.contains('open');
+      document.querySelectorAll('.proj.open').forEach(o => o.classList.remove('open'));
+      if (!wasOpen) p.classList.add('open');
+    });
+  });
+
+  // Lens toggle: filters skills + projects by Software Engineering / Data Science
+  const lensButtons = document.querySelectorAll('.lens button');
+  lensButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      lensButtons.forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const lens = btn.dataset.lens;
+
+      document.querySelectorAll('.tag[data-lens]').forEach(tag => {
+        const matches = lens === 'all' || tag.dataset.lens.includes(lens);
+        tag.classList.toggle('dim', !matches);
+        tag.classList.toggle('hit', matches && lens !== 'all');
+      });
+
+      document.querySelectorAll('#projList .proj').forEach(proj => {
+        const matches = lens === 'all' || proj.dataset.lens.includes(lens);
+        proj.classList.toggle('hide', !matches);
+      });
+    });
+  });
+</script>
+</body>
+</html>
